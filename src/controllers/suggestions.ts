@@ -41,11 +41,12 @@ export const searchCities: RequestHandler = async (req, res) => {
                 { $addFields: { results: { $regexMatch: { input: "$name", regex } } } },
                 { $match: { results: true } },
                 { $sort: { [sort]: 1 } },
-                { $project:
+                {
+                    $project:
                     {
-                        _id:0, name: 1, distance: { $round: [{ $divide: ["$distance", 1000] }, 2] },
-                        latitude:{ $arrayElemAt: [ "$location.coordinates", 1 ] },
-                        longitude:{ $arrayElemAt: [ "$location.coordinates", 0 ] }
+                        _id: 0, name: 1, distance: { $round: [{ $divide: ["$distance", 1000] }, 2] },
+                        latitude: { $arrayElemAt: ["$location.coordinates", 1] },
+                        longitude: { $arrayElemAt: ["$location.coordinates", 0] }
                     }
                 }
             ]
