@@ -14,11 +14,8 @@ app.get('/', (req: Request, res: Response) => {
 
 mongoose.connect(process.env.CONNECTION_STRING || "", (err) => {
     if (err) {
-        console.log(err)
         return;
     }
-    app.listen(process.env.PORT || 3000, () => {
-        console.log("Server is connected");
-    })
+    app.listen(process.env.PORT || 3000)
 });
 
