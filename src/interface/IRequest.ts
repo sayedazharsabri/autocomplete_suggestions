@@ -1,7 +1,7 @@
 export interface IRequest {
     q: string,
-    latitude: number,
-    longitude: number,
-    radius?: number,
+    latitude: string,
+    longitude: string,
+    radius?: string,
     sort?: 'name' | 'distance'
 }
