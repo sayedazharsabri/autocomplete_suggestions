@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import { Request, Response } from "express";
 
 import suggestionsRoute from './routes/suggestions';
@@ -11,7 +12,13 @@ app.get('/', (req: Request, res: Response) => {
     res.send("Welcome to city finder");
 });
 
+mongoose.connect(process.env.CONNECTION_STRING || "", (err) => {
+    if (err) {
+        console.log(err)
+        return;
+    }
+    app.listen(process.env.PORT || 3000, () => {
+        console.log("Server is connected");
+    })
+});
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log("Server is connected");
-})
