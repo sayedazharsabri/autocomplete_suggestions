@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { Request, Response } from "express";
 
 import suggestionsRoute from './routes/suggestions';
+import logger from './logger/logger';
 
 const app = express();
 
@@ -14,8 +15,11 @@ app.get('/', (req: Request, res: Response) => {
 
 mongoose.connect(process.env.CONNECTION_STRING || "", (err) => {
     if (err) {
+        logger.error(err.message);
         return;
     }
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.PORT || 3000,()=>{
+        logger.info("Server Satrted");
+    });
 });
 
