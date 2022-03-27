@@ -39,6 +39,8 @@ export const searchCities: RequestHandler = async (req, res) => {
             [
                 { $geoNear: geoNear },
                 { $addFields: { results: { $regexMatch: { input: "$name", regex } } } },
+                // In future we can replace above line by below line to check matching for ascii and alt_name also
+                // { $addFields: { results: { $or :[{$regexMatch: { input: "$name", regex }}, {$regexMatch: { input: "$ascii", regex }}, {$regexMatch: { input: "$alt_name", regex }}] } } },
                 { $match: { results: true } },
                 { $sort: { [sort]: 1 } },
                 {
