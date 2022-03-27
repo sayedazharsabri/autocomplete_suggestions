@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { IRequest } from '../interface/IRequest';
+import { IRequest, Sort } from '../interface/IRequest';
 import { GeoNear } from '../interface/IMongodb';
 import { City } from '../models/city';
 
@@ -11,11 +11,10 @@ export const searchCities: RequestHandler = async (req, res) => {
         const longitude: number = parseFloat(reqQuery.longitude);
         const latitude: number = parseFloat(reqQuery.latitude);
 
-        let sort: string;
+        let sort: Sort = 'distance';
         if (!!reqQuery.sort) {
             sort = reqQuery.sort;
         }
-
 
         // Regular expression to match partial or complete name
         const regex = new RegExp(`^${q}`);
@@ -35,7 +34,8 @@ export const searchCities: RequestHandler = async (req, res) => {
             [
                 { $geoNear: geoNear },
                 { $addFields: { results: { $regexMatch: { input: "$name", regex } } } },
-                { $match: { results: true } }
+                { $match: { results: true } },
+                {$sort: {[sort]:1}}
             ]
         )
 

@@ -3,5 +3,7 @@ export interface IRequest {
     latitude: string,
     longitude: string,
     radius?: string,
-    sort?: 'name' | 'distance'
+    sort?: Sort
 }
+
+export type Sort = 'name' | 'distance';
