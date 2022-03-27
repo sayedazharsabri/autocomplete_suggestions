@@ -21,7 +21,7 @@ export const searchCities: RequestHandler = async (req, res) => {
         }
 
         // Regular expression to match partial or complete name
-        const regex = new RegExp(`^${q}`);
+        const regex = new RegExp(`^${q}`, "i");
 
         const geoNear: GeoNear = {
             near: { type: "Point", coordinates: [longitude, latitude] },
