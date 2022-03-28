@@ -55,4 +55,18 @@ describe("Test to suggestions APIs", () => {
         expect(result.statusCode).toEqual(422);
         expect(JSON.parse(result.text).message).toBe("Validation failed!");
     });
+
+    it("should return status 422 with valdation failed message if query parameter 'radius' is not a number", async () => {
+        const apiWithQueryWithNonNumericRadius = "/suggestions?q=Acton&latitude=34.46999&longitude=-122.25257&radius=two&sort=distance";
+        const result = await request(app).get(apiWithQueryWithNonNumericRadius);
+        expect(result.statusCode).toEqual(422);
+        expect(JSON.parse(result.text).message).toBe("Validation failed!");
+    });
+
+    it("should return status 422 with valdation failed message if query parameter 'sort' is neither 'distance' nor 'name'", async () => {
+        const apiWithQueryWithNonNumericRadius = "/suggestions?q=Acton&latitude=34.46999&longitude=-122.25257&radius=45&sort=NewField";
+        const result = await request(app).get(apiWithQueryWithNonNumericRadius);
+        expect(result.statusCode).toEqual(422);
+        expect(JSON.parse(result.text).message).toBe("Validation failed!");
+    });
 });
