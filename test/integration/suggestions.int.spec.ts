@@ -19,4 +19,25 @@ describe("Test to suggestions APIs", () => {
         expect(result.statusCode).toEqual(200);
         expect(JSON.parse(result.text).suggestions).toStrictEqual(cityData);
     });
+
+    it("should return status 422 with valdation failed message if required query parameter 'q' is missing", async () => {
+        const apiWithQueryWithMissing_q = "/suggestions?=Acton&latitude=34.46999&longitude=-122.25257&radius=393116.845&sort=distance";
+        const result = await request(app).get(apiWithQueryWithMissing_q);
+        expect(result.statusCode).toEqual(422);
+        expect(JSON.parse(result.text).message).toBe("Validation failed!");
+    });
+
+    it("should return status 422 with valdation failed message if required query parameter 'latitude' is missing", async () => {
+        const apiWithQueryWithMissing_latitude = "/suggestions?q=Acton&longitude=-122.25257&radius=393116.845&sort=distance";
+        const result = await request(app).get(apiWithQueryWithMissing_latitude);
+        expect(result.statusCode).toEqual(422);
+        expect(JSON.parse(result.text).message).toBe("Validation failed!");
+    });
+
+    it("should return status 422 with valdation failed message if required query parameter 'longitude' is missing", async () => {
+        const apiWithQueryWithMissing_longitude = "/suggestions?q=Acton&latitude=34.46999&radius=393116.845&sort=distance";
+        const result = await request(app).get(apiWithQueryWithMissing_longitude);
+        expect(result.statusCode).toEqual(422);
+        expect(JSON.parse(result.text).message).toBe("Validation failed!");
+    });
 });
