@@ -1,0 +1,75 @@
+[{
+    "_id": {
+      "$oid": "6240296c2ff333b1872b1427"
+    },
+    "id": 123,
+    "name": "Dummy1",
+    "ascii": "Dummy1",
+    "alt_name": "Dummy1,DummyXXXXX1",
+    "feat_class": "",
+    "feat_code": "",
+    "country": "Dummy",
+    "cc2": "",
+    "admin1": "Dummy",
+    "admin2": "Dummy",
+    "admin3": "Dummy",
+    "admin4": "Dummy",
+    "population": 12345,
+    "elevation": "",
+    "dem": "111",
+    "tz": "Dummy/Demo",
+    "createdAt": {
+      "$date": "2022-04-22T00:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2022-04-22T00:00:00Z"
+    },
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -111.25257,
+        41.05798
+      ],
+      "_id": {
+        "$oid": "6240296c2ff333b1872b1428"
+      }
+    },
+    "__v": 0
+  },{
+    "_id": {
+      "$oid": "6240296c2ff333b1872b142b"
+    },
+    "id": 5882799,
+    "name": "New Name",
+    "ascii": "New Name",
+    "alt_name": "New Name ",
+    "feat_class": "f",
+    "feat_code": "ff",
+    "country": "Dummy22",
+    "cc2": "",
+    "admin1": "New",
+    "admin2": "",
+    "admin3": "",
+    "admin4": "",
+    "population": 565656,
+    "elevation": "",
+    "dem": "6767",
+    "tz": "New/New",
+    "createdAt": {
+      "$date": "2022-04-11T00:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2022-04-11T00:00:00Z"
+    },
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -14.03528,
+        53.30011
+      ],
+      "_id": {
+        "$oid": "6240296c2ff333b1872b142c"
+      }
+    },
+    "__v": 0
+  }]
