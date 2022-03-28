@@ -10,8 +10,8 @@
     "start": "node ./dist/index.js",
     "start:dev": "nodemon --watch src ./src/index.ts",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "test":"jest -c ./jest.unit.json",
-    "test:coverage":"jest --coverage -c ./jest.unit.json"
+    "test": "jest -c ./jest.unit.json",
+    "test:coverage": "jest --coverage -c ./jest.unit.json"
   },
   "dependencies": {
     "express": "^4.17.3",
