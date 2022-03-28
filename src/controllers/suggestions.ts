@@ -55,6 +55,7 @@ export const searchCities: RequestHandler = async (req, res) => {
         )
         res.status(200).json({ suggestions: result });
     } catch (error: any) {
-        res.status(500).json({message:error.message});
+        error.statusCode = error.statusCode || 500;
+        res.status(error.statusCode).json({ message: error.message });
     }
 }
