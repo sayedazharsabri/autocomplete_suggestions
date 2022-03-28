@@ -23,6 +23,7 @@ export const validateRequest: RequestHandler = (req, res, next) => {
 
         next();
     } catch (error: any) {
-        res.status(500).send({ message: error.message, data: error.data });
+        error.statusCode = error.statusCode || 500;
+        res.status(error.statusCode).json({ message: error.message, data: error.data });
     }
 }
