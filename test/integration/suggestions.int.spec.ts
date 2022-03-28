@@ -20,6 +20,15 @@ describe("Test to suggestions APIs", () => {
         expect(JSON.parse(result.text).suggestions).toStrictEqual(cityData);
     });
 
+    it("should return status 200 with [] if no data matched - GET /suggestions with query parameters", async () => {
+        const apiWithQuery = "/suggestions?q=SomeRandomCityInTheMiddleOfNowhere&latitude=34.46999&longitude=-122.25257&radius=393116.845&sort=distance";
+        City.aggregate = jest.fn(() => Promise.resolve([]) as any);
+        const result = await request(app).get(apiWithQuery);
+        expect(result.statusCode).toEqual(200);
+        expect(JSON.parse(result.text).suggestions).toStrictEqual([]);
+    });
+
+
     it("should return status 422 with valdation failed message if required query parameter 'q' is missing", async () => {
         const apiWithQueryWithMissing_q = "/suggestions?=Acton&latitude=34.46999&longitude=-122.25257&radius=393116.845&sort=distance";
         const result = await request(app).get(apiWithQueryWithMissing_q);
