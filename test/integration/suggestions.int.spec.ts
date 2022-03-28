@@ -5,6 +5,7 @@ import { City } from '../../src/models/city';
 import cityData from '../mockdata/cities.json'
 
 describe("Test to suggestions APIs", () => {
+
     it("GET / should return status 200 with valid message", async () => {
         const result = await request(app).get("/");
         expect(result.text).toEqual("Welcome to city finder");
