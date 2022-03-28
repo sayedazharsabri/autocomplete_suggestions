@@ -6,7 +6,7 @@ import cityData from '../mockdata/cities.json'
 
 let mockRequest: Partial<Request>;
 let mockResponse: Partial<Response>;
-let responseObject = {};
+
 const mockResponseFn = () => {
     const res = { statusCode: 0, responseObject: {}, status() { }, json() { } };
 
