@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { searchCities } from '../../src/controllers/suggestions';
 import { IRequest } from '../../src/interface/IRequest';
 import { City } from '../../src/models/city';
+import cityData from '../mockdata/cities.json'
 
 let mockRequest: Partial<Request>;
 let mockResponse: Partial<Response>;
@@ -42,8 +43,8 @@ describe("Suggestions controller to search city", () => {
         expect(typeof searchCities).toBe("function");
     });
 
-    it("Should return 200 on success", async () => {
-        City.aggregate = jest.fn(() => Promise.resolve({}) as any);
+    it("Should return 200 with response data on success", async () => {
+        City.aggregate = jest.fn(() => Promise.resolve(cityData) as any);
         mockRequest.query = {
             q: "string",
             latitude: "string",
@@ -52,15 +53,17 @@ describe("Suggestions controller to search city", () => {
             sort: 'distance'
         }
         await searchCities(mockRequest as Request, mockResponse as Response, {} as NextFunction);
+        let responseObject = (mockResponse as any).responseObject;
         expect(mockResponse.statusCode).toBe(200);
+        expect(responseObject.suggestions).toBe(cityData);
     });
 
     it("Should return 500 and failure message on failure", async () => {
         const message = "failed in fetching data";
         City.aggregate = jest.fn(() => Promise.reject({message:"failed in fetching data"}) as any);
         await searchCities(mockRequest as Request, mockResponse as Response, {} as NextFunction);
-        expect(mockResponse.statusCode).toBe(500);
         let responseObject = (mockResponse as any).responseObject;
+        expect(mockResponse.statusCode).toBe(500);
         expect(responseObject.message).toBe(message);
     });
 })
