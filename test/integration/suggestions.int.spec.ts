@@ -3,7 +3,6 @@ import request from "supertest";
 
 import { City } from '../../src/models/city';
 import cityData from '../mockdata/cities.json'
-import console from "console";
 
 describe("Test to suggestions APIs", () => {
     it("GET / should return status 200 with valid message", async () => {
