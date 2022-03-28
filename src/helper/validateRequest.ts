@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import { validationResult } from "express-validator";
+import logger from '../logger/logger';
 
 // Updated Error to handle statusCode and data
 declare global {
@@ -24,6 +25,7 @@ export const validateRequest: RequestHandler = (req, res, next) => {
         next();
     } catch (error: any) {
         error.statusCode = error.statusCode || 500;
+        logger.error(JSON.stringify(error));
         res.status(error.statusCode).json({ message: error.message, data: error.data });
     }
 }

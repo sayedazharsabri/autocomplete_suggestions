@@ -7,9 +7,10 @@ import { City } from '../models/city';
  * Below function is to search cities for provided request query
  *
  */
-export const searchCities: RequestHandler = async (req, res) => {
+export const searchCities: RequestHandler = async (req, res, next) => {
 
     try {
+
         const reqQuery: IRequest = req.query as any;
         const q: string = reqQuery.q;
         const longitude: number = parseFloat(reqQuery.longitude);
@@ -56,6 +57,6 @@ export const searchCities: RequestHandler = async (req, res) => {
         res.status(200).json({ suggestions: result });
     } catch (error: any) {
         error.statusCode = error.statusCode || 500;
-        res.status(error.statusCode).json({ message: error.message });
+        next(error);
     }
 }

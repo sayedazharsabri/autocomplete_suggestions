@@ -53,13 +53,17 @@ describe("Suggestions controller to search city", () => {
         expect(responseObject.suggestions).toBe(cityData);
     });
 
-    it("Should return 500 and failure message on failure", async () => {
+    it("Should call 'NextFunction' with 500 and failure message on failure", async () => {
 
         const message = "failed in fetching data";
+        let errorFromNext:{statusCode:number, message:string} = {statusCode:0, message:"No message"};
+        const nextFn = (err:any) => {
+            errorFromNext = err;
+        }
         City.aggregate = jest.fn(() => Promise.reject({ message: "failed in fetching data" }) as any);
-        await searchCities(mockRequest as Request, mockResponse as Response, {} as NextFunction);
+        await searchCities(mockRequest as Request, mockResponse as Response, nextFn as NextFunction);
         let responseObject = (mockResponse as any).responseObject;
-        expect(mockResponse.statusCode).toBe(500);
-        expect(responseObject.message).toBe(message);
+        expect(errorFromNext.statusCode).toBe(500);
+        expect(errorFromNext.message).toBe(message);
     });
 })
