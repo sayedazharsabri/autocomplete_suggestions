@@ -1,7 +1,7 @@
 import express from 'express';
 import { searchCities } from '../controllers/suggestions';
 import { validateRequest } from '../helper/validateRequest';
-import { query } from 'express-validator/check';
+import { query } from 'express-validator';
 
 const router: express.Router = express.Router();
 
