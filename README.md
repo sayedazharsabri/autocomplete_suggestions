@@ -37,7 +37,10 @@ This project will help user to find the suggested city names on the basis of pro
 
 
 ## What next?
-- We will add filter for alternate name also.
+- We will add featue to show alt_name and ascii name if they match and name does not match, in place of name
+
+## configuration
+- CONSIDER_ASCII_AND_ALT_NAME_MATCHING_BUT_SHOW_NAME_ONLY : if it is true, then for query matching it also check for ascii and alt_name otherwise it only match name from collection.
 
 ## Notes
 - Radius is in KM.
