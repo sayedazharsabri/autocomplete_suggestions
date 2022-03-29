@@ -1,11 +1,13 @@
 import express from 'express';
 import { Request, Response, NextFunction } from "express";
 
+import { validateIP } from './helper/validateRequest'
 import logger from './logger/logger';
 import suggestionsRoute from './routes/suggestions';
 
 const app = express();
 
+app.use(validateIP);
 app.use('/suggestions', suggestionsRoute);
 
 app.get('/', (req: Request, res: Response) => {
@@ -17,7 +19,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
     error.statusCode = error.statusCode || 500;
     const response: { message: string, data?: any[] } = { message: "Something went wrong please try later." };
 
-    logger.error(JSON.stringify(error));
+    logger.error(JSON.stringify({ message: error.message, statusCode: error.statusCode, error }));
 
     if (!!error.message) {
         response.message = error.message;

@@ -37,10 +37,14 @@ This project will help user to find the suggested city names on the basis of pro
 
 
 ## What next?
-- We will add featue to show alt_name and ascii name if they match and name does not match, in place of name
+- We will add featue to show alt_name and ascii name if they match and name does not match, in place of name.
+- We will analyse and add feature to block IP address for some duration, if they are attempting too many times again and again.
 
 ## configuration
 - CONSIDER_ASCII_AND_ALT_NAME_MATCHING_BUT_SHOW_NAME_ONLY : if it is true, then for query matching it also check for ascii and alt_name otherwise it only match name from collection.
+- ENABLE_IP_RATE_LIMITING: By default this flag is false, if you want to apply rate limiting over ip address then run "redis" cache on some server or localhost or using docker and then update "REDIS_HOST" IP in .env file make it true. 
 
 ## Notes
 - Radius is in KM.
+- To configure rate limiting kindly check constants file. By default it allow maximum 5 attempts in 1 minute from same IP address.
+- To run redis using docker use the command "docker run --name suggestions-redis -p 6379:6379 -d redis"

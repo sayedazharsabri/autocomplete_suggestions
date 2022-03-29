@@ -1,15 +1,18 @@
 version: '3.7'
 
-services: 
+services:
     autocomplete_suggestions:
-        build: 
+        build:
             context: .
             dockerfile: Dockerfile
         container_name: autocomplete_suggestions
         expose:
             - '3000'
-        ports: 
+        ports:
             - '3000:3000'
-        environment: 
+        environment:
             CONNECTION_STRING: "${CONNECTION_STRING}"
+            REDIS_HOST: "${REDIS_HOST}"
+            NODE_ENV: "${NODE_ENV}"
+            PORT: ${PORT}
         command: yarn start
