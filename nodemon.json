@@ -1,7 +1,8 @@
 {
-    "env":{
-        "CONNECTION_STRING":"",
-        "PORT":3000,
-        "NODE_ENV":"development"
+    "env": {
+        "CONNECTION_STRING": "",
+        "PORT": 3000,
+        "NODE_ENV": "development",
+        "REDIS_HOST": "redis://127.0.0.1:6379"
     }
 }
