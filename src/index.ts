@@ -9,6 +9,6 @@ mongoose.connect(process.env.CONNECTION_STRING || "", (err) => {
         return;
     }
     app.listen(process.env.PORT || 3000,()=>{
-        logger.info("Server Satrted");
+        logger.info("Server Started");
     });
 });
