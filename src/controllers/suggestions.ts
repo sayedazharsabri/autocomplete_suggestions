@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import { IRequest, Sort } from '../interface/IRequest';
 import { GeoNear } from '../interface/IMongodb';
 import { City } from '../models/city';
+import { config } from '../config/config';
 
 /**
  * Below function is to search cities for provided request query
@@ -36,12 +37,16 @@ export const searchCities: RequestHandler = async (req, res, next) => {
             geoNear.maxDistance = radius;
         }
 
+        let regexMatchForName = { $regexMatch: { input: "$name", regex } };
+        // Checking config to include alt name and ascii
+        if (config.CONSIDER_ASCII_AND_ALT_NAME_MATCHING_BUT_SHOW_NAME_ONLY) {
+            regexMatchForName = { $or: [{ $regexMatch: { input: "$name", regex } }, { $regexMatch: { input: "$ascii", regex } }, { $regexMatch: { input: "$alt_name", regex } }] } as any;
+        }
+
         const result = await City.aggregate(
             [
                 { $geoNear: geoNear },
-                { $addFields: { results: { $regexMatch: { input: "$name", regex } } } },
-                // In future we can replace above line by below line to check matching for ascii and alt_name also
-                // { $addFields: { results: { $or :[{$regexMatch: { input: "$name", regex }}, {$regexMatch: { input: "$ascii", regex }}, {$regexMatch: { input: "$alt_name", regex }}] } } },
+                { $addFields: { results: regexMatchForName } },
                 { $match: { results: true } },
                 { $sort: { [sort]: 1 } },
                 {
