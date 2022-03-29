@@ -11,8 +11,8 @@ const logger = winston.createLogger({
         // - Write all logs with importance level of `error` or less to `log/error_YYYYMMDD.log`
         // - Write all logs with importance level of `info` or less to `log/combined_YYYYMMDD.log`
         //
-        new winston.transports.File({ filename: path.join(__dirname, '..', 'log', 'error_' + moment().format('YYYYMMDD') + '.log'), level: 'error' }),
-        new winston.transports.File({ filename: path.join(__dirname, '..', 'log', 'combined_' + moment().format('YYYYMMDD') + '.log') }),
+        new winston.transports.File({ filename: path.join(__dirname, '..', '..', 'log', 'error_' + moment().format('YYYYMMDD') + '.log'), level: 'error' }),
+        new winston.transports.File({ filename: path.join(__dirname, '..', '..', 'log', 'combined_' + moment().format('YYYYMMDD') + '.log') }),
     ],
 });
 
