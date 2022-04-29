@@ -4,8 +4,8 @@ This project will help user to find the suggested city names on the basis of pro
 # Get started with the project
 - Step 1: Clone this repository.
 - Step 2: Run Command - "yarn install" to install all the required packages.
-- Step 3: Add connection string and port details to yarn.json.
-- Step 4: Run Command - "yarn start:dev" to execute this project on localhost.
+- Step 3: Add connection string and port details to nodemon.json (for development) or in environment for production.
+- Step 4: Run Command - "yarn start:dev" to execute this project on localhost for production there is already a start script in package.json.
 - Note: After step 4, the project will create a cities collection in the provided mongodb database with required location index.
 - Step 5: Import data from [/doc/dummyCitiesCollection.json](https://github.com/sayedazharsabri/autocomplete_suggestions/blob/dev/doc/dummyCitiesCollection.json) to the cities collection.
 - Step 6: Send a GET request [localhost:3000/suggestions?q=dummy1&latitude=34.46999&longitude=-122.25257&radius=393116.845&sort=distance ](http://localhost:3000/suggestions?q=dummy1&latitude=34.46999&longitude=-122.25257&radius=393116.845&sort=distance).
